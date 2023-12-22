@@ -11,8 +11,9 @@ app = Flask(__name__, static_url_path='/static')
 DB_NAME = 'interstellar-inferno.sqlite'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
-init_db(app, db, DB_NAME)
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 # Assuming the zip file is located at /static/files/INTERSTELLAR_INFERNO.zip
 # ZIP_FILE_PATH = '/static/files/InterstellarInferno.zip'

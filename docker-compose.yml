@@ -2,6 +2,18 @@ version: '3'
 services:
   web:
     image: python:3.10-alpine
-    command: sh -c "pip install -r requirements.txt && python main.py"
+    command: sh -c "pip install -r /app/requirements.txt && python /app/main.py"
     volumes:
       - ./src:/app
+    networks:
+      - network1
+      - network2
+     
+
+networks:
+  network1:
+    name: nginxproxymanager_default
+    external: true
+  network2:
+    name: nginx-proxy-manager_default
+    external: true
