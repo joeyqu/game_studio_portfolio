@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script type="text/javascript" src="https://unpkg.com/darkreader@4.9.10/darkreader.js"></script>
 
     <style>
         body {
             margin: 0;
             padding: 0;
-
+            height: 100vh;
+            width: 100vw;
         }
 
         .background-container {
@@ -55,8 +57,8 @@
 
         .content-container {
             position: absolute;
-            /* width: 100vw; */
-
+            width: 100vw;
+            padding: 15vh;
             overflow-y: hidden;
             scroll-behavior: scroll;
             z-index: 0;
@@ -93,23 +95,25 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark px-5 bg-gradient bg-black">
+    <!-- Navigation Bar -->
+    <nav class="fixed-top    navbar navbar-expand-lg navbar-dark bg-gradient bg-black">
+
         <a class="navbar-brand " href="/"><i class="fas fa-space-shuttle fa-2x"></i></a>
-        <a class="navbar-brand " href="/games/interstellar-inferno">Interstellar Inferno</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/games/interstellar-inferno">Home</a>
+                    <a class="nav-link" href="/games">Games</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/games/interstellar-inferno/news">News</a>
+                    <a class="nav-link" href="/news">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/leaderboard">Wiki</a>
+                    <a class="nav-link" href="/faq">FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/games/interstellar-inferno/leaderboard">Leaderboard</a>
+                    <a class="nav-link active" href="/about">About</a>
                 </li>
+
 
             </ul>
         </div>
@@ -122,8 +126,9 @@
         </ul>
 
     </nav>
-    <div class="container mt-5">
-        <h1 class=" text-center"> Welcome to our Pengin Games!</h1>
+
+    <div class="content-container">
+        <h1 class=" text-center"> Welcome to Pengin Games!</h1>
         <div class="row">
 
             <div class="col-2">
@@ -132,10 +137,10 @@
                     <h2>Sections</h2>
                     <ul>
                         <li><a href="#introduction">Introduction</a></li>
-                        <li><a href="#current">Our Current Game</a></li>
-                        <li><a href="#future">Future Releases</a></li>
-                        <li><a href="#identity">What Sets Us Apart</a></li>
-                        <li><a href="#contact">Get in Touch</a></li>
+                        <li><a href="#current"> <!-- Our Current Game --> currently</a></li>
+                        <li><a href="#future"> <!-- Future Releases --> future</a></li>
+                        <li><a href="#identity"><!-- What Sets Us Apart --> about me</a></li>
+                        <li><a href="#contact"><!-- Get in Touch --> contact</a></li>
                     </ul>
                 </div>
 
@@ -145,67 +150,76 @@
                 <div id="content">
                     <section id="introduction">
 
-                        <p>Hello, fellow gamers and enthusiasts! I'm [Founder's Name], the founder, sole employee, game
+                        <p> <!-- Hello, fellow gamers and enthusiasts! I'm [Founder's Name], the founder, sole employee, game
                             designer, and
                             developer at Pengin Games. Currently, we have an exciting game available, and I'm
                             thrilled to share
-                            that there are more adventures on the horizon!</p>
+                            that there are more adventures on the horizon! --> hi
+                            -pepijn luchtmeijer </p>
 
                     </section>
 
                     <section id="current">
 
-                        <h2>Our Current Game</h2>
+                        <h2> <!-- Our Current Game --> currently </h2>
 
-                        <p>Our current title is [Current Game Name], an [insert brief description]. I poured my heart
+                        <p> <!-- Our current title is [Current Game Name], an [insert brief description]. I poured my heart
                             and
                             soul into
                             creating an engaging experience, and I hope you enjoy playing it as much as I enjoyed making
-                            it.
+                            it. --> maybe working on stuff maybe not
                         </p>
                     </section>
                     <section id="future">
-                        <h2>Future Releases</h2>
+                        <h2> <!-- Future Releases --> future </h2>
 
-                        <p>Pengin Games is not stopping with just one game! I'm actively working on new and
+                        <p> <!-- Pengin Games is not stopping with just one game! I'm actively working on new and
                             exciting
                             projects
                             that will take you on different journeys, challenge your skills, and provide fresh,
                             immersive
                             gameplay. Stay
-                            tuned for upcoming releases that promise to bring even more diversity to our game portfolio.
+                            tuned for upcoming releases that promise to bring even more diversity to our game portfolio. -->
+                            idk
                         </p>
                     </section>
                     <section id="identity">
-                        <h2>What Sets Us Apart</h2>
+                        <h2><!-- What Sets Us Apart --> about me </h2>
 
-                        <p>As a solo creator, I have the freedom to explore unconventional ideas and experiment with
+                        <p> <!-- As a solo creator, I have the freedom to explore unconventional ideas and experiment with
                             unique
                             gameplay
                             mechanics. This flexibility allows Pengin Games to push boundaries and create games
                             that
                             stand out in
-                            the crowded world of gaming.</p>
+                            the crowded world of gaming. --> student at hku games </p>
                     </section>
                     <section id="contact">
 
-                        <h2>Get in Touch</h2>
+                        <h2> <!-- Get in Touch --> contact</h2>
 
-                        <p>Thank you for being part of the Pengin Games community! If you have any questions,
+                        <p> <!-- Thank you for being part of the Pengin Games community! If you have any questions,
                             feedback, or just
                             want to say hello, feel free to reach out. Your support means the world, and I look forward
                             to
                             sharing many
-                            more exciting gaming adventures with you!</p>
+                            more exciting gaming adventures with you! --> discord: clubpengin </p>
 
-                        <p>Email: [YourEmail@example.com]</p>
+                        <!-- <p>Email: [YourEmail@example.com]</p> -->
                     </section>
 
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            DarkReader.setFetchMethod(window.fetch)
+            DarkReader.enable();
+        });
 
+
+    </script>
 </body>
 
 </html>
