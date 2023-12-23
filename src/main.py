@@ -18,7 +18,7 @@ with app.app_context():
 # Assuming the zip file is located at /static/files/INTERSTELLAR_INFERNO.zip
 # ZIP_FILE_PATH = '/static/files/InterstellarInferno.zip'
 DOWNLOAD_FOLDER = 'static/files'  # This should be the folder where your zip file is located
-DOWNLOAD_FILENAME = 'InterstellarInferno.zip'
+DOWNLOAD_FILENAME = 'InterstellarInferno1.zip'
 
 # Website routes
     
@@ -36,6 +36,9 @@ def news():
 @app.route('/about')
 def about():
     return render_template('about.html')
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
 
 
 
@@ -49,7 +52,7 @@ def interstellar_inferno_download_file():
         return send_from_directory(DOWNLOAD_FOLDER, DOWNLOAD_FILENAME, as_attachment=True)
     except:
         print('file not found')
-        return "Could not find file to download"
+        return "The game is not "
 
 
 @app.route('/games/interstellar-inferno/wiki')
