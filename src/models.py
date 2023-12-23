@@ -17,3 +17,17 @@ class Score(db.Model):
 
     def __repr__(self):
         return json.dumps(self.as_dict(), indent=4, sort_keys=True, default=str)
+    
+
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String,nullable=False)
+    subtitle = db.Column(db.String,nullable=False)
+    img = db.Column(db.String,default="https://via.placeholder.com/300")
+    type = db.Column(db.String,nullable=False) # company or game name _ seperated
+
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def __repr__(self):
+        return json.dumps(self.as_dict(), indent=4, sort_keys=True, default=str)

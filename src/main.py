@@ -2,7 +2,7 @@ import json
 from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from helpers import init_db
-from models import db
+from models import Article, db
 from models import Score
 
 
@@ -81,7 +81,17 @@ def submit_score():
 @app.route('/api/interstellar-inferno/leaderboard')
 def leaderboard_api():
     scores = Score.query.all()
-    return jsonify([score.as_dict() for score in scores])   
+    return jsonify([score.as_dict() for score in scores])
+
+
+@app.route('/api/news/publish')
+def publish_news():
+    if request.method == 'POST':
+        data = request.get_json()
+        newarticle = Article(title=data.get('title'), subtitle=data.get('subtitle'),type=data.get('type'))
+        db.session.add(newarticle)
+        db.session.commit()
+        return jsonify(newarticle.as_dict())
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=7373,debug=True)
