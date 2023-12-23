@@ -29,6 +29,19 @@
             z-index: -2;
         }
 
+        .background-container video {
+            filter: blur(8px);
+            /* background: url('/static/images/background.png') no-repeat center center fixed; */
+            /* background-size: cover; */
+            /* filter: blur(5px); */
+            object-fit: cover;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            padding-top: 5vh;
+        }
+
         /* Hide scrollbar for Chrome, Safari and Opera */
         .overlay::-webkit-scrollbar {
             display: none;
@@ -53,12 +66,13 @@
             text-align: center;
             color: white;
             overflow-y: scroll;
+
         }
 
         .content-container {
             position: absolute;
             width: 100vw;
-            padding: 2%;
+            padding: 15vh;
             overflow-y: hidden;
             scroll-behavior: scroll;
             z-index: 0;
@@ -78,6 +92,10 @@
         .card {
             width: 100%;
         }
+
+        #interstellar-inferno {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -85,12 +103,14 @@
 
     <!-- Background Container -->
     <div class="background-container">
-        <!-- <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
-            <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
-        </video> -->
+        <video id="background-video" autoplay loop muted poster="/static/images/earth.png">
+            <source
+                src="https://cdn.pixabay.com/vimeo/478348906/earth-55990.mp4?width=640&hash=e3d0c6760ae854e12c2a54543297b49949721586"
+                type="video/mp4">
+        </video>
     </div>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient bg-black">
+    <nav class="fixed-top    navbar navbar-expand-lg navbar-dark bg-gradient bg-black">
 
         <a class="navbar-brand " href="/"><i class="fas fa-space-shuttle fa-2x"></i></a>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -125,11 +145,51 @@
     <div class="overlay">
     </div>
     <div class="content-container">
-        <h1 class="pb-5">Our Games</h1>
+        <h1 class="pb-5">My Games</h1>
 
         <div class="table-responsive bg-black opacity-75 mt-0">
             <div class="card-group">
-                {% for game_number in range(1, 11) %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img id="interstellar-inferno" src="/static/images/background.png"
+                            style="aspect-ratio: 1/1; width: auto; height: auto;" class="card-img-top"
+                            alt="Placeholder Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Interstellar Inferno</h5>
+                            <p class="card-text">My latest game as I find my way in the world of game dev as part of a
+                                uni project
+                            </p>
+                            <a href="/games/interstellar-inferno" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="//live.staticflickr.com/3101/2896087420_c428a22cc3_c.jpg"
+                            style="aspect-ratio: 1/1; width: auto; height: auto;" class="card-img-top"
+                            alt="Placeholder Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Coming Soon</h5>
+                            <p class="card-text">Something new may appear here
+                            </p>
+                            <a href="/games/interstellar-inferno" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMWRkMDVhYWQtOGUwYS00NzFiLWIwZGYtMTI2YjYxMmJmYWI3XkEyXkFqcGdeQXVyMzA2ODQzMjg@._V1_.jpg"
+                            style="aspect-ratio: 1/1; width: auto; height: auto;" class="card-img-top"
+                            alt="Placeholder Image">
+                        <div class="card-body">
+                            <h5 class="card-title">In the Future</h5>
+                            <p class="card-text">If the stars align something might eventually appear here.
+                            </p>
+                            <a href="/games/interstellar-inferno" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- {% for game_number in range(1, 11) %}
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
@@ -141,7 +201,7 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %} -->
             </div>
         </div>
 
@@ -164,6 +224,9 @@
     <script>
         $(document).ready(function () {
             $('#leaderboardTable').DataTable();
+        });
+        $("#interstellar-inferno").click(function () {
+            window.location.href = '/games/interstellar-inferno'
         });
     </script>
 </body>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=0.1">
     <title>Interstellar Inferno</title>
 
     <!-- Bootstrap CSS -->
@@ -27,6 +27,19 @@
             width: 100%;
             height: 100%;
             z-index: -2;
+        }
+
+        .background-container video {
+            filter: blur(8px);
+            /* background: url('/static/images/background.png') no-repeat center center fixed; */
+            /* background-size: cover; */
+            /* filter: blur(5px); */
+            object-fit: cover;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            padding-top: 5vh;
         }
 
         /* Hide scrollbar for Chrome, Safari and Opera */
@@ -58,7 +71,7 @@
         .content-container {
             position: absolute;
             width: 100vw;
-            padding: 2%;
+            padding: 15vh;
             overflow-y: hidden;
             scroll-behavior: scroll;
             z-index: 0;
@@ -85,13 +98,15 @@
 
     <!-- Background Container -->
     <div class="background-container">
-        <!-- <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
-            <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
-        </video> -->
+        <video id="background-video" autoplay loop muted poster="/static/images/earth.png">
+            <source
+                src="https://cdn.pixabay.com/vimeo/478348906/earth-55990.mp4?width=640&hash=e3d0c6760ae854e12c2a54543297b49949721586"
+                type="video/mp4">
+        </video>
     </div>
 
-     <!-- Navigation Bar -->
-     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient bg-black">
+    <!-- Navigation Bar -->
+    <nav class="fixed-top    navbar navbar-expand-lg navbar-dark bg-gradient bg-black">
 
         <a class="navbar-brand " href="/"><i class="fas fa-space-shuttle fa-2x"></i></a>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -126,13 +141,15 @@
     <div class="overlay">
     </div>
     <div class="content-container">
-        <h1 class="pb-5">Pengin Games News</h1>
+        <h1 class="pb-5">My News</h1>
 
         <div class="table-responsive bg-black opacity-75 mt-0">
             <div class="card-group">
-                <div class="col-md-3 mb-4">
+                <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
+                        <img src="https://miro.medium.com/v2/resize:fit:1200/1*mQv_yk_QD0Od8sCWQD35wA.jpeg"
+                            style="aspect-ratio: 1/1; width: auto; height: auto;" class="card-img-top"
+                            alt="Placeholder Image">
                         <div class="card-body">
                             <h5 class="card-title">New Release: Version 1.1 now available</h5>
                             <p class="card-text">We have been working hard to fix those pesky bugs and bring you more
@@ -142,9 +159,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
+                        <img src="https://www.shutterstock.com/image-vector/available-now-word-concept-vector-600nw-2236019719.jpg"
+                            class="card-img-top" style="aspect-ratio: 1/1; width: auto; height: auto;"
+                            alt="Placeholder Image">
                         <div class="card-body pt">
                             <h5 class="card-title">Interstellar Inferno is now available!</h5>
                             <p class="card-text">We are excited to announce the official launch of Interstellar Inferno
@@ -155,19 +174,35 @@
                         </div>
                     </div>
                 </div>
-                {% for article_number in range(1, 11) %}
-                <div class="col-md-3 mb-4">
+                <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
+                        <img src="https://unity.com/sites/default/files/styles/810_scale_width/public/2021-10/C%23%20Scripting.jpg?itok=qh23hdyh"
+                            class="card-img-top" alt="Placeholder Image"
+                            style="aspect-ratio: 1/1; width: auto; height: auto;">
                         <div class="card-body">
-                            <h5 class="card-title">Article {{ article_number }}</h5>
-                            <p class="card-text">This is a sample article description. You can customize it as needed.
+                            <h5 class="card-title">The Making of Interstellar Inferno</h5>
+                            <p class="card-text">I made a thing! Find out a bit about how. I dive into the code and
+                                share
+                                my thought process.
                             </p>
                             <a href="#" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                <!-- {% for article_number in range(1, 11) %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Placeholder Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Article {{ article_number }}</h5>
+                            <p class="card-text">This is a sample article description. You can customize it as needed.
+                                This is a sample article description. You can customize it as needed.
+                            </p>
+                            <a href="#" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} -->
             </div>
         </div>
 
