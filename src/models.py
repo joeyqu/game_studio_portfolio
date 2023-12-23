@@ -9,6 +9,7 @@ class Score(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)
     score = db.Column(db.Integer, nullable=False)
+    planets = db.Column(db.Integer, nullable=True)
     time_created = db.Column(DateTime(timezone=True), server_default=func.now())
     time_updated = db.Column(DateTime(timezone=True), onupdate=func.now())
 

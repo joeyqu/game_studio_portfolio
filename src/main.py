@@ -76,7 +76,7 @@ def interstellar_inferno_leaderboard():
 def submit_score():
     if request.method == 'POST':
         data = request.get_json()
-        newscore = Score(username=data.get('username'), score=data.get('score'))
+        newscore = Score(username=data.get('username'), score=data.get('score'),planets=data.get('planets'))
         db.session.add(newscore)
         db.session.commit()
         return jsonify(newscore.as_dict())
