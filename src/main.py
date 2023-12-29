@@ -87,7 +87,7 @@ def leaderboard_api():
     return jsonify([score.as_dict() for score in scores])
 
 
-@app.route('/api/news/publish')
+@app.route('/api/news/publish', methods=['POST'])
 def publish_news():
     if request.method == 'POST':
         data = request.get_json()
