@@ -77,6 +77,34 @@
         .navbar-nav {
             padding-left: 2%;
         }
+
+        .highlight-row {
+            animation: highlightNewRow 2s ease-in-out;
+        }
+
+        @keyframes highlightNewRow {
+            0% {
+                background-color: rgba(75, 192, 192, 0.7);
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+        #liveUpdateIndicator {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 0.8em;
+        }
+
+        .connected {
+            color: #28a745;
+        }
+
+        .disconnected {
+            color: #dc3545;
+        }
     </style>
 </head>
 
@@ -124,7 +152,8 @@
     <div class="overlay">
     </div>
     <div class="content-container">
-        <h1 class="pb-5">Leaderboard</h1>
+        <h1 class="pb-5">Leaderboard <span id="liveUpdateIndicator" class="disconnected"><i class="fas fa-circle"></i>
+                Live Updates</span></h1>
 
         <div class="table-responsive bg-black opacity-75 mt-0">
             <table id="leaderboardTable"
@@ -138,7 +167,7 @@
                         <th>Created</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
+                <tbody class="table-group-divider" id="leaderboardBody">
                     {% for score in scores %}
                     <tr class="table-dark">
                         <td>{{score.id}}</td>
@@ -166,11 +195,116 @@
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
-    <!-- DataTables Initialization -->
+    <!-- Socket.IO JS -->
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+
+    <!-- Leaderboard Initialization with Socket.IO -->
     <script>
+        let leaderboardTable;
+        let socket;
+
         $(document).ready(function () {
-            $('#leaderboardTable').DataTable();
+            // Initialize DataTable
+            leaderboardTable = $('#leaderboardTable').DataTable({
+                order: [[2, 'desc']], // Sort by score (3rd column) descending
+                pageLength: 10,
+                responsive: true
+            });
+
+            // Connect to Socket.IO server
+            connectWebSocket();
         });
+
+        function connectWebSocket() {
+            // Create a simple Socket.IO connection - more compatible with proxies
+            socket = io({
+                reconnection: true,
+                reconnectionAttempts: 5,
+                reconnectionDelay: 1000
+            });
+
+            // Log connection attempts for debugging
+            console.log('Attempting to connect to Socket.IO server');
+
+            // Update connection status indicator
+            socket.on('connect', function () {
+                console.log('Connected to WebSocket server');
+                $('#liveUpdateIndicator').removeClass('disconnected').addClass('connected');
+                $('#liveUpdateIndicator').html('<i class="fas fa-circle"></i> Live Updates (Connected)');
+            });
+
+            socket.on('disconnect', function () {
+                console.log('Disconnected from WebSocket server');
+                $('#liveUpdateIndicator').removeClass('connected').addClass('disconnected');
+                $('#liveUpdateIndicator').html('<i class="fas fa-circle"></i> Live Updates (Disconnected)');
+            });
+
+            socket.on('connect_error', function (error) {
+                console.log('Connection error:', error);
+                $('#liveUpdateIndicator').removeClass('connected').addClass('disconnected');
+                $('#liveUpdateIndicator').html('<i class="fas fa-circle"></i> Live Updates (Error)');
+            });
+
+            // Handle initial leaderboard data
+            socket.on('init_leaderboard', function (scores) {
+                console.log('Received initial leaderboard data', scores);
+                // Clear existing data and add all scores
+                leaderboardTable.clear();
+
+                scores.forEach(function (score) {
+                    addScoreToTable(score, false);
+                });
+
+                leaderboardTable.draw();
+            });
+
+            // Handle new scores
+            socket.on('new_score', function (score) {
+                console.log('New score received:', score);
+                addScoreToTable(score, true);
+                leaderboardTable.draw();
+            });
+        }
+
+        function addScoreToTable(score, highlight) {
+            // Format the date
+            const created = new Date(score.time_created).toLocaleString();
+
+            // Add the new row to the DataTable
+            const newRow = leaderboardTable.row.add([
+                score.id,
+                score.username,
+                score.score,
+                created
+            ]).draw(false).node();
+
+            // Highlight new scores
+            if (highlight) {
+                $(newRow).addClass('highlight-row');
+
+                // Play a sound effect for new scores
+                playNotificationSound();
+
+                // Remove highlight class after animation completes
+                setTimeout(function () {
+                    $(newRow).removeClass('highlight-row');
+                }, 2000);
+            }
+        }
+
+        function playNotificationSound() {
+            // Create an audio element for the notification sound
+            const audio = new Audio('/static/sounds/notification.mp3');
+            audio.volume = 0.5;
+
+            // Try to play the sound (may be blocked by browser autoplay policies)
+            const promise = audio.play();
+            if (promise !== undefined) {
+                promise.catch(function (error) {
+                    console.log("Audio play was prevented: ", error);
+                });
+            }
+        }
     </script>
 </body>
 

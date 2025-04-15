@@ -6,14 +6,13 @@ services:
     volumes:
       - ./src:/app
     networks:
-      - network1
-      - network2
-     
+      - proxy
+    environment:
+      - PYTHONUNBUFFERED=1
+   
+    restart: unless-stopped
 
 networks:
-  network1:
-    name: nginxproxymanager_default
-    external: true
-  network2:
+  proxy:
     name: nginx-proxy-manager_default
     external: true
